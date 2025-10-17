@@ -6,6 +6,7 @@ const progressText = document.getElementById('progress');
 const scoreText = document.getElementById('score');
 const finalScore = document.getElementById('final-score');
 const message = document.getElementById('message');
+const progressFill = document.getElementById('progress-fill');
 
 const startScreen = document.getElementById('start-screen');
 const questionScreen = document.getElementById('question-screen');
@@ -48,6 +49,8 @@ function showQuestion() {
         answerButtons.appendChild(btn);
     });
 
+    // 更新进度条与进度文字
+    progressFill.style.width = ((currentQuestion) / questions.length) * 100 + '%';
     progressText.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
     scoreText.textContent = `Score: ${score}`;
 }
@@ -59,14 +62,12 @@ function selectAnswer(selectedIndex, correctIndex) {
     const buttons = Array.from(answerButtons.children);
 
     buttons.forEach((btn, index) => {
-        btn.disabled = true; // 禁止再次点击
+        btn.disabled = true;
         if (index === correctIndex) {
-            btn.style.backgroundColor = "#8bc34a"; // 正确绿色
-            btn.style.color = "white";
+            btn.classList.add('correct');
         }
         if (index === selectedIndex && selectedIndex !== correctIndex) {
-            btn.style.backgroundColor = "#f44336"; // 错误红色
-            btn.style.color = "white";
+            btn.classList.add('wrong');
         }
     });
 
@@ -78,6 +79,7 @@ function selectAnswer(selectedIndex, correctIndex) {
         if (currentQuestion < questions.length) {
             showQuestion();
         } else {
+            progressFill.style.width = "100%";
             showResult();
         }
     }, 1500);
@@ -95,4 +97,5 @@ function restartQuiz() {
     currentQuestion = 0;
     resultScreen.classList.remove('active');
     startScreen.classList.add('active');
+    progressFill.style.width = "0%";
 }

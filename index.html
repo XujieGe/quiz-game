@@ -8,19 +8,26 @@
 </head>
 <body>
     <div class="quiz-container" id="quiz-container">
+        <!-- 起始页 -->
         <div id="start-screen" class="screen active">
             <h1>Quiz Time!</h1>
             <p>Test your knowledge with these fun questions</p>
             <button id="start-btn">Start Quiz</button>
         </div>
 
+        <!-- 题目页 -->
         <div id="question-screen" class="screen">
             <h2 id="question-text"></h2>
+            <!-- 进度条 -->
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
             <div id="answer-buttons" class="btn-container"></div>
             <p id="progress"></p>
             <p id="score"></p>
         </div>
 
+        <!-- 结果页 -->
         <div id="result-screen" class="screen">
             <h2>Quiz Results</h2>
             <p id="final-score"></p>
